@@ -157,3 +157,24 @@ The priority dip-trading strategy improves on QQQ buy-and-hold in this window,
 with only a modest increase in drawdown for the nine-stock version. However, it
 still trails equal-weight buy-and-hold because this sample strongly rewards
 simply owning the AI and semiconductor winners through the whole period.
+
+### NVDA excluded
+
+Because NVDA dominates the direct buy-and-hold results, the same core QQQ
+dip-trading strategy was rerun with NVDA excluded.
+
+Results from 2023-01-03 through 2026-03-31:
+
+| Run | Final value | CAGR | Annual volatility | Sharpe | Max drawdown |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Eight-stock universe, NVDA excluded | 2.5692 | 33.82% | 23.38% | 1.37 | -26.68% |
+| Three priority stocks only: GOOGL/AAPL/TSM | 2.2302 | 28.10% | 20.23% | 1.33 | -23.14% |
+| QQQ buy-and-hold | 2.2245 | 28.00% | 19.87% | 1.35 | -22.77% |
+| Eight-stock equal-weight buy-and-hold | 3.1704 | 42.80% | 27.73% | 1.43 | -31.06% |
+| Three-stock equal-weight buy-and-hold | 3.3706 | 45.52% | 25.14% | 1.63 | -31.11% |
+
+Excluding NVDA weakens the dip-trading edge materially. The eight-stock version
+still beats QQQ on return and narrowly on Sharpe, but with a deeper drawdown.
+The three-priority-stock version is essentially a QQQ-like result with slightly
+lower Sharpe. This suggests that much of the recent benefit came from having
+access to very strong rebound names rather than from the trading rule alone.
