@@ -178,3 +178,33 @@ still beats QQQ on return and narrowly on Sharpe, but with a deeper drawdown.
 The three-priority-stock version is essentially a QQQ-like result with slightly
 lower Sharpe. This suggests that much of the recent benefit came from having
 access to very strong rebound names rather than from the trading rule alone.
+
+## Original QQQ-parking dip strategy with NVDA excluded
+
+The earlier Strategy 2 variant keeps idle capital in QQQ and shifts from QQQ
+into stocks only when individual stocks fall from their prior all-time highs.
+Unlike the "core QQQ plus 30% trading sleeve" version above, this version can
+move more aggressively into dip opportunities according to the configured
+tranches.
+
+This run excludes NVDA, starts after the 2022 drawdown, and uses the same
+eight-stock universe as the no-NVDA test above:
+
+Universe: AAPL, MSFT, AMZN, GOOGL, META, TSLA, TSM, AMD.
+
+Results from 2023-01-03 through 2026-03-31:
+
+| Run | Buy levels | Tranche | Final value | CAGR | Sharpe | Max drawdown |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| Best Sharpe, original QQQ-parking Strategy 2 | 30%/40%/50%/60% | 7.5% | 3.0587 | 41.22% | 1.47 | -25.41% |
+| Higher return, similar Sharpe | 30%/40%/50%/60% | 10.0% | 3.3441 | 45.17% | 1.46 | -26.37% |
+| Highest CAGR | 20%/30%/40%/50% | 15.0% | 3.6142 | 48.69% | 1.31 | -33.77% |
+| QQQ buy-and-hold | - | - | 2.2245 | 28.00% | 1.35 | -22.77% |
+| Eight-stock equal-weight buy-and-hold | - | - | 3.1704 | 42.80% | 1.43 | -31.06% |
+| Core QQQ + 30% sleeve, NVDA excluded | 25%/35%/45% | 10.0% | 2.5692 | 33.82% | 1.37 | -26.68% |
+
+With NVDA excluded, the original QQQ-parking dip strategy is stronger than the
+more constrained 30% trading-sleeve version. Its best Sharpe setting also beats
+the eight-stock equal-weight basket on Sharpe with a smaller drawdown, though
+the equal-weight basket remains competitive on total return. The best settings
+again wait for deeper selloffs before buying: first entry at a 30% drawdown.
