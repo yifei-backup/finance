@@ -154,7 +154,7 @@ def backtest_dip_strategy(
         cash = 0.0
 
     equity_points: list[tuple[pd.Timestamp, float]] = []
-    prior_highs = prices[universe].cummax().shift(1)
+    prior_highs = prices[list(universe)].cummax().shift(1)
 
     for date, row in prices.iterrows():
         portfolio_value = cash + sum(shares[ticker] * row[ticker] for ticker in universe)

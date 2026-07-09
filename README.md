@@ -44,3 +44,18 @@ Outputs are written to `results/`:
 - `strategy2_equity_curve.csv`
 - `strategy2_trades.csv`
 - `strategy2_summary.md`
+
+## Current run summary
+
+Using adjusted close data from 2014-01-02 through 2026-07-09:
+
+| Run | Final value | CAGR | Annual volatility | Sharpe | Max drawdown |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Strategy 2, idle cash | 5.9301 | 15.28% | 15.69% | 0.99 | -37.74% |
+| QQQ buy-and-hold | 9.1442 | 19.34% | 21.41% | 0.94 | -35.12% |
+| Strategy 2, idle QQQ | 18.0112 | 25.99% | 25.34% | 1.04 | -48.66% |
+
+Under these assumptions, the cash version has a slightly higher Sharpe than
+QQQ buy-and-hold but lower absolute return. The QQQ-parking version has the
+highest Sharpe and return in this run, while taking a meaningfully deeper max
+drawdown.
