@@ -125,3 +125,35 @@ In this post-2022 window, Strategy 2 beats QQQ and DIA on CAGR and Sharpe, but
 does not beat simply holding the nine-stock equal-weight basket. The
 equal-weight stock basket benefits heavily from the strong post-2022 rebound in
 mega-cap AI and semiconductor names, especially with TSM and AMD included.
+
+## Core QQQ plus prioritized dip-trading strategy
+
+This simulation models a more conservative "long-term conviction plus short-term
+arbitrage" structure:
+
+- Keep at least 70% of the portfolio in QQQ.
+- Use at most 30% as a trading sleeve.
+- Buy from QQQ into stocks when they fall 25%, 35%, and 45% from their prior
+  all-time high.
+- Each buy level targets 10% of portfolio value, subject to the 30% total
+  trading-sleeve cap.
+- Sell one-half of a position after a 20% gain on remaining cost basis, another
+  one-half after a 30% gain, or sell all once the stock returns to 90% of its
+  prior all-time high.
+- Priority order: GOOGL, NVDA, AAPL, TSM.
+
+Results from 2023-01-03 through 2026-03-31:
+
+| Run | Final value | CAGR | Annual volatility | Sharpe | Max drawdown |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Nine-stock universe, priority order applied | 2.7008 | 35.90% | 23.68% | 1.42 | -26.83% |
+| Four priority stocks only | 2.4202 | 31.37% | 20.60% | 1.43 | -22.44% |
+| QQQ buy-and-hold | 2.2245 | 28.00% | 19.87% | 1.35 | -22.77% |
+| DIA buy-and-hold | 1.4789 | 12.84% | 13.47% | 0.97 | -15.95% |
+| Nine-stock equal-weight buy-and-hold | 4.1732 | 55.44% | 30.63% | 1.60 | -31.61% |
+| Four-stock equal-weight buy-and-hold | 5.5769 | 70.00% | 34.46% | 1.72 | -33.73% |
+
+The priority dip-trading strategy improves on QQQ buy-and-hold in this window,
+with only a modest increase in drawdown for the nine-stock version. However, it
+still trails equal-weight buy-and-hold because this sample strongly rewards
+simply owning the AI and semiconductor winners through the whole period.
