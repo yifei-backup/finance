@@ -59,3 +59,16 @@ Under these assumptions, the cash version has a slightly higher Sharpe than
 QQQ buy-and-hold but lower absolute return. The QQQ-parking version has the
 highest Sharpe and return in this run, while taking a meaningfully deeper max
 drawdown.
+
+Using adjusted close data from 2019-01-02 through 2026-07-09:
+
+| Run | Final value | CAGR | Annual volatility | Sharpe | Max drawdown |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Strategy 2, idle cash | 3.7439 | 19.20% | 18.58% | 1.04 | -37.74% |
+| QQQ buy-and-hold | 4.8818 | 23.49% | 24.03% | 1.00 | -35.12% |
+| Strategy 2, idle QQQ | 8.5188 | 32.98% | 28.97% | 1.13 | -48.66% |
+
+From 2019 onward, both strategy-2 variants have higher Sharpe than QQQ
+buy-and-hold. The cash version still lags QQQ in total return, while the
+QQQ-parking version beats QQQ on both return and Sharpe but with a much deeper
+drawdown.
