@@ -107,7 +107,8 @@ def write_summary(
         "## Quick read",
         "",
         "- Idle capital policy is the biggest driver: using QQQ as the parking asset materially raises return and Sharpe, but also increases drawdown.",
-        "- Earlier first buys and larger tranches tend to improve upside in this Mag7 bull-market-heavy sample, but they also concentrate risk during large selloffs.",
+        "- In this sample, deeper first buys generally rank better than earlier entries; the result is sensitive to the large 2022 drawdown and rebound.",
+        "- Larger tranches improve upside when the rebound is strong, but they also concentrate risk during large selloffs.",
         "- The drawdown-filtered table is useful if the goal is to avoid turning a higher Sharpe into an uncomfortable realized loss path.",
         "",
     ]

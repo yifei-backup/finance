@@ -72,3 +72,27 @@ From 2019 onward, both strategy-2 variants have higher Sharpe than QQQ
 buy-and-hold. The cash version still lags QQQ in total return, while the
 QQQ-parking version beats QQQ on both return and Sharpe but with a much deeper
 drawdown.
+
+## Strategy 2 parameter sweep from 2019
+
+The first parameter sweep varies the most important assumptions:
+
+- Idle capital: cash vs QQQ
+- First buy trigger: 10%, 15%, 20%, 25%, or 30% below the prior all-time high
+- Buy ladder: four levels spaced 10 percentage points apart
+- Per-level tranche size: 2.5%, 5%, 7.5%, 10%, or 15% of current portfolio value
+
+Top results from 2019-01-02 through 2026-07-09:
+
+| Rank idea | Idle capital | Buy levels | Tranche | Final value | CAGR | Sharpe | Max drawdown |
+| --- | --- | --- | ---: | ---: | ---: | ---: | ---: |
+| Highest Sharpe | QQQ | 30%/40%/50%/60% | 15.0% | 18.4874 | 47.42% | 1.28 | -52.62% |
+| High Sharpe, lower drawdown | cash | 30%/40%/50%/60% | 7.5% | 5.1173 | 24.26% | 1.21 | -35.33% |
+| Conservative drawdown | cash | 30%/40%/50%/60% | 5.0% | 3.2279 | 16.87% | 1.18 | -27.61% |
+| Original 2019 cash baseline | cash | 20%/30%/40%/50% | 5.0% | 3.7437 | 19.20% | 1.04 | -37.74% |
+
+The first sweep suggests that the most important parameter is the idle-capital
+choice. Parking idle capital in QQQ drives much higher returns and Sharpe, but
+creates substantially deeper drawdowns. Among drawdown triggers, this sample
+favored waiting for deeper declines before buying; the best-ranked combinations
+cluster around a first buy at 30% below the prior high.
