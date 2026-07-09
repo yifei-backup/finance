@@ -96,3 +96,32 @@ choice. Parking idle capital in QQQ drives much higher returns and Sharpe, but
 creates substantially deeper drawdowns. Among drawdown triggers, this sample
 favored waiting for deeper declines before buying; the best-ranked combinations
 cluster around a first buy at 30% below the prior high.
+
+## Post-2022 sweep with TSM and AMD
+
+This run skips the 2022 deep drawdown by starting on 2023-01-01, ends at
+2026-03-31, adds TSM and AMD to the stock universe, and always parks idle
+capital in QQQ.
+
+Universe: AAPL, MSFT, NVDA, AMZN, GOOGL, META, TSLA, TSM, AMD.
+
+Comparison buy-and-hold results from 2023-01-03 through 2026-03-31:
+
+| Benchmark | Final value | CAGR | Annual volatility | Sharpe | Max drawdown |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| QQQ buy-and-hold | 2.2245 | 28.00% | 19.87% | 1.35 | -22.77% |
+| DIA buy-and-hold | 1.4789 | 12.84% | 13.47% | 0.97 | -15.95% |
+| Equal-weight stocks | 4.1732 | 55.44% | 30.63% | 1.60 | -31.61% |
+
+Top Strategy 2 parameter results:
+
+| Rank idea | Buy levels | Tranche | Final value | CAGR | Sharpe | Max drawdown |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| Highest Sharpe | 30%/40%/50%/60% | 7.5% | 3.1054 | 41.89% | 1.47 | -25.27% |
+| Higher return, similar Sharpe | 30%/40%/50%/60% | 10.0% | 3.4044 | 45.97% | 1.47 | -26.18% |
+| Highest CAGR | 20%/30%/40%/50% | 15.0% | 3.6619 | 49.29% | 1.30 | -33.43% |
+
+In this post-2022 window, Strategy 2 beats QQQ and DIA on CAGR and Sharpe, but
+does not beat simply holding the nine-stock equal-weight basket. The
+equal-weight stock basket benefits heavily from the strong post-2022 rebound in
+mega-cap AI and semiconductor names, especially with TSM and AMD included.
