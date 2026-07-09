@@ -50,6 +50,7 @@ def backtest_core_trade_strategy(
     sell_gains: tuple[float, ...],
     core_fraction: float,
     trading_fraction: float,
+    min_trade_fraction: float,
     initial_capital: float,
     prior_high_warmup: pd.DataFrame | None = None,
 ) -> tuple[pd.Series, pd.DataFrame]:
@@ -67,7 +68,6 @@ def backtest_core_trade_strategy(
     triggered_levels = {ticker: set() for ticker in tickers}
     realized_sell_stages = {ticker: set() for ticker in tickers}
     invested_cash = {ticker: 0.0 for ticker in tickers}
-    realized_proceeds = {ticker: 0.0 for ticker in tickers}
     trades: list[dict[str, object]] = []
 
     if prior_high_warmup is not None and not prior_high_warmup.empty:
@@ -84,9 +84,8 @@ def backtest_core_trade_strategy(
             if shares[ticker] <= 0:
                 continue
 
-            cost_basis_left = max(invested_cash[ticker] - realized_proceeds[ticker], 0.0)
             position_value = shares[ticker] * row[ticker]
-            unrealized_gain = position_value / cost_basis_left - 1.0 if cost_basis_left > 0 else 0.0
+            unrealized_gain = position_value / invested_cash[ticker] - 1.0 if invested_cash[ticker] > 0 else 0.0
             prior_high = running_highs[ticker]
             near_prior_high = prior_high > 0 and row[ticker] >= 0.90 * prior_high
 
@@ -110,7 +109,7 @@ def backtest_core_trade_strategy(
             proceeds = sold_shares * row[ticker]
             shares[ticker] -= sold_shares
             base_shares += proceeds / row[base_asset]
-            realized_proceeds[ticker] += proceeds
+            invested_cash[ticker] *= 1.0 - sell_fraction
             trades.append(
                 {
                     "date": date.date().isoformat(),
@@ -128,7 +127,6 @@ def backtest_core_trade_strategy(
                 triggered_levels[ticker].clear()
                 realized_sell_stages[ticker].clear()
                 invested_cash[ticker] = 0.0
-                realized_proceeds[ticker] = 0.0
 
         value_before = portfolio_value(cash, base_shares, shares, row, base_asset)
         current_stock_value = stock_value(shares, row)
@@ -150,7 +148,7 @@ def backtest_core_trade_strategy(
                     available_trade_budget,
                     available_base_value,
                 )
-                if trade_value <= 1e-10:
+                if trade_value < min_trade_fraction * value_before:
                     continue
 
                 base_shares -= trade_value / row[base_asset]
@@ -234,6 +232,7 @@ def write_summary(
         f"- Core asset: {args.base_asset}",
         f"- Core QQQ floor: {format_pct(args.core_fraction)}",
         f"- Trading sleeve cap: {format_pct(args.trading_fraction)}",
+        f"- Minimum trade size: {format_pct(args.min_trade_fraction)} of current portfolio value",
         f"- Buy drawdowns: {', '.join(format_pct(item) for item in args.buy_levels)} from prior all-time high",
         f"- Buy weights: {', '.join(format_pct(item) for item in args.buy_weights)} of current portfolio value",
         f"- Sell gains: {', '.join(format_pct(item) for item in args.sell_gains)} of remaining cost basis, or sell all near 90% of prior high",
@@ -265,6 +264,7 @@ def main() -> None:
     parser.add_argument("--initial-capital", type=float, default=1.0)
     parser.add_argument("--core-fraction", type=float, default=0.70)
     parser.add_argument("--trading-fraction", type=float, default=0.30)
+    parser.add_argument("--min-trade-fraction", type=float, default=0.01)
     parser.add_argument("--buy-levels", default="0.25,0.35,0.45")
     parser.add_argument("--buy-weights", default="0.10,0.10,0.10")
     parser.add_argument("--sell-gains", default="0.20,0.30")
@@ -306,6 +306,7 @@ def main() -> None:
         sell_gains=args.sell_gains,
         core_fraction=args.core_fraction,
         trading_fraction=args.trading_fraction,
+        min_trade_fraction=args.min_trade_fraction,
         initial_capital=args.initial_capital,
         prior_high_warmup=warmup,
     )
